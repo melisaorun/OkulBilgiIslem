@@ -33,7 +33,7 @@ namespace OkulBilgiİslem
             save.Notu = textBox8.Text;
             db.OdevSet.Add(save);
             db.SaveChanges();
-            dataGridView1.DataSource = db.OdevSet.ToList();
+            dataGridView1.DataSource = db.OdevSet.ToList(); 
         }
 
         private void button6_Click(object sender, EventArgs e)
