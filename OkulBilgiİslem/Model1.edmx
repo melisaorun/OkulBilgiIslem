@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="OgrenciSet" EntityType="Model1.Store.OgrenciSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VeliSet" EntityType="Model1.Store.VeliSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="KullaniciSet" EntityType="Model1.Store.KullaniciSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OdevSet" EntityType="Model1.Store.OdevSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="VeliOgrenci" Association="Model1.Store.VeliOgrenci">
+      <End Role="Veli" EntitySet="VeliSet" />
+      <End Role="Ogrenci" EntitySet="OgrenciSet" />
+    </AssociationSet>
+    <AssociationSet Name="OgrenciOdev" Association="Model1.Store.OgrenciOdev">
+      <End Role="Ogrenci" EntitySet="OgrenciSet" />
+      <End Role="Odev" EntitySet="OdevSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="OgrenciSet">
+    <Key>
+      <PropertyRef Name="OgrenciNo" />
+    </Key>
+    <Property Name="OgrenciNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OgrenciAdiSoyadi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Sinifi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Bolumu" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Adresi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefon" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OkulNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="VeliNo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VeliSet">
+    <Key>
+      <PropertyRef Name="VeliNo" />
+    </Key>
+    <Property Name="VeliNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VeliAdiSoyadi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Yakinlik" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Adres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefon" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EgitimDurumu" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KullaniciSet">
+    <Key>
+      <PropertyRef Name="KullaniciNo" />
+    </Key>
+    <Property Name="KullaniciNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Sifre" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OdevSet">
+    <Key>
+      <PropertyRef Name="OdevNo" />
+    </Key>
+    <Property Name="OdevNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OgrenciAdiSoyadi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Sinifi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Bolumu" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ders" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Konu" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="VerilisTarihi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TeslimTarihi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Notu" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OgrenciNo" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="VeliOgrenci">
+    <End Role="Veli" Type="Model1.Store.VeliSet" Multiplicity="1" />
+    <End Role="Ogrenci" Type="Model1.Store.OgrenciSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Veli">
+        <PropertyRef Name="VeliNo" />
+      </Principal>
+      <Dependent Role="Ogrenci">
+        <PropertyRef Name="VeliNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OgrenciOdev">
+    <End Role="Ogrenci" Type="Model1.Store.OgrenciSet" Multiplicity="1" />
+    <End Role="Odev" Type="Model1.Store.OdevSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ogrenci">
+        <PropertyRef Name="OgrenciNo" />
+      </Principal>
+      <Dependent Role="Odev">
+        <PropertyRef Name="OgrenciNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="OgrenciSet" EntityType="Model1.Ogrenci" />
+          <EntitySet Name="VeliSet" EntityType="Model1.Veli" />
+          <EntitySet Name="KullaniciSet" EntityType="Model1.Kullanici" />
+          <EntitySet Name="OdevSet" EntityType="Model1.Odev" />
+          <AssociationSet Name="VeliOgrenci" Association="Model1.VeliOgrenci">
+            <End Role="Veli" EntitySet="VeliSet" />
+            <End Role="Ogrenci" EntitySet="OgrenciSet" />
+          </AssociationSet>
+          <AssociationSet Name="OgrenciOdev" Association="Model1.OgrenciOdev">
+            <End Role="Ogrenci" EntitySet="OgrenciSet" />
+            <End Role="Odev" EntitySet="OdevSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Ogrenci">
+          <Key>
+            <PropertyRef Name="OgrenciNo" />
+          </Key>
+          <Property Name="OgrenciNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OgrenciAdiSoyadi" Type="String" Nullable="false" />
+          <Property Name="Sinifi" Type="String" Nullable="false" />
+          <Property Name="Bolumu" Type="String" Nullable="false" />
+          <Property Name="Adresi" Type="String" Nullable="false" />
+          <Property Name="Telefon" Type="String" Nullable="false" />
+          <Property Name="OkulNo" Type="String" Nullable="false" />
+          <NavigationProperty Name="Veli" Relationship="Model1.VeliOgrenci" FromRole="Ogrenci" ToRole="Veli" />
+          <Property Name="VeliNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Odev" Relationship="Model1.OgrenciOdev" FromRole="Ogrenci" ToRole="Odev" />
+        </EntityType>
+        <EntityType Name="Veli">
+          <Key>
+            <PropertyRef Name="VeliNo" />
+          </Key>
+          <Property Name="VeliNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VeliAdiSoyadi" Type="String" Nullable="false" />
+          <Property Name="Yakinlik" Type="String" Nullable="false" />
+          <Property Name="Adres" Type="String" Nullable="false" />
+          <Property Name="Telefon" Type="String" Nullable="false" />
+          <Property Name="EgitimDurumu" Type="String" Nullable="false" />
+          <NavigationProperty Name="Ogrenci" Relationship="Model1.VeliOgrenci" FromRole="Veli" ToRole="Ogrenci" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="KullaniciNo" />
+          </Key>
+          <Property Name="KullaniciNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdi" Type="String" Nullable="false" />
+          <Property Name="Sifre" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Odev">
+          <Key>
+            <PropertyRef Name="OdevNo" />
+          </Key>
+          <Property Name="OdevNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OgrenciAdiSoyadi" Type="String" Nullable="false" />
+          <Property Name="Sinifi" Type="String" Nullable="false" />
+          <Property Name="Bolumu" Type="String" Nullable="false" />
+          <Property Name="Ders" Type="String" Nullable="false" />
+          <Property Name="Konu" Type="String" Nullable="false" />
+          <Property Name="VerilisTarihi" Type="String" Nullable="false" />
+          <Property Name="TeslimTarihi" Type="String" Nullable="false" />
+          <Property Name="Notu" Type="String" Nullable="false" />
+          <NavigationProperty Name="Ogrenci" Relationship="Model1.OgrenciOdev" FromRole="Odev" ToRole="Ogrenci" />
+          <Property Name="OgrenciNo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="VeliOgrenci">
+          <End Type="Model1.Veli" Role="Veli" Multiplicity="1" />
+          <End Type="Model1.Ogrenci" Role="Ogrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Veli">
+              <PropertyRef Name="VeliNo" />
+            </Principal>
+            <Dependent Role="Ogrenci">
+              <PropertyRef Name="VeliNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OgrenciOdev">
+          <End Type="Model1.Ogrenci" Role="Ogrenci" Multiplicity="1" />
+          <End Type="Model1.Odev" Role="Odev" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ogrenci">
+              <PropertyRef Name="OgrenciNo" />
+            </Principal>
+            <Dependent Role="Odev">
+              <PropertyRef Name="OgrenciNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="OgrenciSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Ogrenci)">
+        <MappingFragment StoreEntitySet="OgrenciSet">
+          <ScalarProperty Name="OgrenciNo" ColumnName="OgrenciNo" />
+          <ScalarProperty Name="OgrenciAdiSoyadi" ColumnName="OgrenciAdiSoyadi" />
+          <ScalarProperty Name="Sinifi" ColumnName="Sinifi" />
+          <ScalarProperty Name="Bolumu" ColumnName="Bolumu" />
+          <ScalarProperty Name="Adresi" ColumnName="Adresi" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="OkulNo" ColumnName="OkulNo" />
+          <ScalarProperty Name="VeliNo" ColumnName="VeliNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VeliSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Veli)">
+        <MappingFragment StoreEntitySet="VeliSet">
+          <ScalarProperty Name="VeliNo" ColumnName="VeliNo" />
+          <ScalarProperty Name="VeliAdiSoyadi" ColumnName="VeliAdiSoyadi" />
+          <ScalarProperty Name="Yakinlik" ColumnName="Yakinlik" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="EgitimDurumu" ColumnName="EgitimDurumu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KullaniciSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Kullanici)">
+        <MappingFragment StoreEntitySet="KullaniciSet">
+          <ScalarProperty Name="KullaniciNo" ColumnName="KullaniciNo" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OdevSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Odev)">
+        <MappingFragment StoreEntitySet="OdevSet">
+          <ScalarProperty Name="OdevNo" ColumnName="OdevNo" />
+          <ScalarProperty Name="OgrenciAdiSoyadi" ColumnName="OgrenciAdiSoyadi" />
+          <ScalarProperty Name="Sinifi" ColumnName="Sinifi" />
+          <ScalarProperty Name="Bolumu" ColumnName="Bolumu" />
+          <ScalarProperty Name="Ders" ColumnName="Ders" />
+          <ScalarProperty Name="Konu" ColumnName="Konu" />
+          <ScalarProperty Name="VerilisTarihi" ColumnName="VerilisTarihi" />
+          <ScalarProperty Name="TeslimTarihi" ColumnName="TeslimTarihi" />
+          <ScalarProperty Name="Notu" ColumnName="Notu" />
+          <ScalarProperty Name="OgrenciNo" ColumnName="OgrenciNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
